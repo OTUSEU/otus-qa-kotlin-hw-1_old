@@ -13,13 +13,13 @@ class Runner<T : Any> : TestRunner<T> {
 
     private fun runBefore(){
         steps::class.declaredMemberFunctions.filter { it.name.startsWith("before") }.forEach {
-            steps::class.java.getMethod(it.name).invoke(steps)
+            it.call(steps) // steps::class.java.getMethod(it.name).invoke(steps)
         }
     }
 
     private fun runAfter(){
         steps::class.declaredMemberFunctions.filter { it.name.startsWith("after") }.forEach {
-            steps::class.java.getMethod(it.name).invoke(steps)
+            it.call(steps) // steps::class.java.getMethod(it.name).invoke(steps)
         }
     }
 }
